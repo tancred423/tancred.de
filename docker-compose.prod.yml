@@ -38,6 +38,6 @@ networks:
   mysql-network:
     external: true
   tancred-network:
-    driver: bridge
+    external: true
   web:
     external: true
