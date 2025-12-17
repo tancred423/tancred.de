@@ -1,7 +1,6 @@
 services:
   backend:
-    image: ghcr.io/${GITHUB_REPOSITORY:-owner/repo}/backend:latest
-    container_name: tancred-backend-prod
+    container_name: tancred-backend
     environment:
       DATABASE_URL: ${DATABASE_URL}
       JWT_SECRET: ${JWT_SECRET}
@@ -10,6 +9,9 @@ services:
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       SHORTENER_DOMAIN: ${SHORTENER_DOMAIN}
       MAIN_SITE_URL: ${MAIN_SITE_URL}
+    expose: 
+      - "8000"
+    image: ghcr.io/${GITHUB_REPOSITORY:-owner/repo}/backend:latest
     ports:
       - "8001:8000"
     networks:
@@ -19,16 +21,21 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: ghcr.io/${GITHUB_REPOSITORY:-owner/repo}/frontend:latest
     container_name: tancred-frontend-prod
-    ports:
-      - "8083:80"
     depends_on:
       - backend
+    expose:
+      - "80"
+    image: ghcr.io/${GITHUB_REPOSITORY:-owner/repo}/frontend:latest
     networks:
       - mysql-network
+      - web
+    ports:
+      - "8083:80"
     restart: unless-stopped
 
 networks:
   mysql-network:
+    external: true
+  web:
     external: true
