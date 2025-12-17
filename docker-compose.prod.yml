@@ -15,9 +15,8 @@ services:
     ports:
       - "8001:8000"
     networks:
-      mysql-network:
-        aliases:
-          - backend
+      - mysql-network
+      - tancred-network
     restart: unless-stopped
 
   frontend:
@@ -29,6 +28,7 @@ services:
     image: ghcr.io/${GITHUB_REPOSITORY:-owner/repo}/frontend:latest
     networks:
       - mysql-network
+      - tancred-network
       - web
     ports:
       - "8083:80"
@@ -37,5 +37,7 @@ services:
 networks:
   mysql-network:
     external: true
+  tancred-network:
+    driver: bridge
   web:
     external: true
