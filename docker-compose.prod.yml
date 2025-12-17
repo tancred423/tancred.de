@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    container_name: tancred-frontend-prod
+    container_name: tancred-frontend
     depends_on:
       - backend
     expose:
