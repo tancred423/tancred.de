@@ -17,6 +17,7 @@ services:
     networks:
       - mysql-network
       - tancred-network
+      - web
     restart: unless-stopped
 
   frontend:
