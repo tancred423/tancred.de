@@ -1,3 +1,7 @@
+> **Archived**
+>
+> Moved to https://gitlab.com/tancred/tancred-website
+
 # tancred.de
 
 A personal portfolio website with project showcase and URL shortener, featuring
